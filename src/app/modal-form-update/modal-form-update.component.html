@@ -1,0 +1,78 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Product update</h4>
+		<button
+			type="button"
+			class="btn-close"
+			aria-label="Close"
+			(click)="modal.dismiss('Cross click')"
+		></button>
+	</div>
+	<div class="modal-body">
+		<form
+			[formGroup]="userForm"
+			(ngSubmit)="onSubmit()"
+			class="row gap-3 justify-content-center"
+		>
+			<div class="row">
+				<div class="col">
+					<label for="inputName" class="form-label">Name</label>
+					<input
+						(keyup.enter)="onSubmit()"
+						formControlName="name"
+						type="text"
+						class="form-control"
+						id="inputName"
+						[ngClass]="{'is-invalid': hasError('name', 'required')}"
+					/>
+					<span class="text-danger" *ngIf="hasError('name', 'required')"
+						>Required Name</span
+					>
+				</div>
+				<div class="col">
+					<label for="inputPhone" class="form-label">Phone</label>
+					<input
+						(keyup.enter)="onSubmit()"
+						formControlName="phone"
+						type="text"
+						class="form-control"
+						id="inputPhone"
+						[ngClass]="{'is-invalid': hasError('phone', 'required')}"
+					/>
+					<span class="text-danger" *ngIf="hasError('phone', 'required')"
+						>Required Phone</span
+					>
+				</div>
+			</div>
+			<div class="row align-content-lg-start">
+				<div class="col-12">
+					<label for="inputEmail" class="form-label">Email</label>
+					<input
+						(keyup.enter)="onSubmit()"
+						formControlName="email"
+						type="text"
+						class="form-control"
+						id="inputEmail"
+						[ngClass]="{'is-invalid': hasError('email', 'required') || hasError('email', 'email')}"
+					/>
+					<span class="text-danger" *ngIf="hasError('email', 'required')"
+						>Required Email</span
+					>
+					<span class="text-danger" *ngIf="hasError('email', 'email')"
+						>Invalid Email</span
+					>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button
+			[disabled]="!userForm.valid"
+			(click)="onSubmit()"
+			type="submit"
+			class="btn btn-success"
+		>
+			Update
+		</button>
+	</div>
+</ng-template>

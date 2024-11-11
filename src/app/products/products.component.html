@@ -1,0 +1,54 @@
+<ng-container *ngIf="successAlert">
+	<div
+		class="position-absolute bottom-0 end-0 m-3 alert alert-success alert-dismissible fade show"
+		role="alert"
+	>
+		<strong>User updated successfully!</strong>
+		<button
+			type="button"
+			class="btn-close"
+			data-bs-dismiss="alert"
+			aria-label="Close"
+			(click)="successAlert = !successAlert"
+		></button>
+	</div>
+</ng-container>
+
+<span>{{successAlert}}</span>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of productList">
+			<th scope="row">{{item.id}}</th>
+			<td>{{item.name}}</td>
+			<td>{{item.email}}</td>
+			<td class="d-flex gap-2">
+				<button
+					[routerLink]="['/products/product-details/', item.id]"
+					class="btn btn-light"
+				>
+					Detail
+				</button>
+				<button class="btn btn-dark" (click)="modal_form.open(item)">
+					Edit
+				</button>
+				<button class="btn btn-dark" (click)="deleteUser(item, item.id)">
+					Delete
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<app-modal-form-update
+	#modal_form
+	(resetTable)="getProducts()"
+	(setAlertStatus)="setAlertStatus()"
+/>

@@ -1,0 +1,72 @@
+<ng-container *ngIf="successAlert">
+	<div
+		class="position-absolute bottom-0 end-0 m-3 alert alert-success alert-dismissible fade show"
+		role="alert"
+	>
+		<strong>User created successfully!</strong>
+		<button
+			type="button"
+			class="btn-close"
+			data-bs-dismiss="alert"
+			aria-label="Close"
+			(click)="successAlert = !successAlert"
+		></button>
+	</div>
+</ng-container>
+
+<form
+	[formGroup]="userForm"
+	(ngSubmit)="onSubmit()"
+	class="row g-3 w-50 m-auto"
+>
+	<div class="col-md-12">
+		<label for="inputEmail" class="form-label">Email</label>
+		<input
+			formControlName="email"
+			type="text"
+			class="form-control"
+			id="inputEmail"
+		/>
+		<span class="text-danger" *ngIf="hasError('email', 'required')"
+			>Required Email</span
+		>
+		<span class="text-danger" *ngIf="hasError('email', 'email')"
+			>Invalid Email</span
+		>
+	</div>
+	<div class="col-md-6">
+		<label for="inputName" class="form-label">Name</label>
+		<input
+			formControlName="name"
+			type="text"
+			class="form-control"
+			id="inputName"
+		/>
+		<span class="text-danger" *ngIf="hasError('name', 'required')"
+			>Required Name</span
+		>
+	</div>
+	<div class="col-md-6">
+		<label for="inputPhone" class="form-label">Phone</label>
+		<input
+			formControlName="phone"
+			type="text"
+			class="form-control"
+			id="inputPhone"
+		/>
+		<span class="text-danger" *ngIf="hasError('phone', 'required')"
+			>Required Phone</span
+		>
+	</div>
+
+	<div class="col-12 text-end">
+		<button
+			[disabled]="!userForm.valid"
+			type="submit"
+			class="btn text-light"
+			style="background: #4a8;"
+		>
+			Submit
+		</button>
+	</div>
+</form>

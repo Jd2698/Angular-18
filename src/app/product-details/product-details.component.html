@@ -1,0 +1,19 @@
+<ng-container *ngIf="!loading">
+	<ng-container *ngIf="product">
+		<div class="card m-auto" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">{{product.name}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">{{product.email}}</h6>
+				<p class="card-text">
+					{{product.phone}}
+				</p>
+				<div class="text-end">
+					<a routerLink="/products" class="card-link">Back</a>
+				</div>
+			</div>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="!product">
+		<span>Not found</span>
+	</ng-container>
+</ng-container>
